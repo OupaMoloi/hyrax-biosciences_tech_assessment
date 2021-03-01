@@ -1,25 +1,60 @@
-<ion-header [translucent]="true">
+<!--ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      Country List
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header-->
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Inbox
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+
+  <section class="header8 cid-sq1Uim84hx mbr-parallax-background" id="header8-f">
+    <div class="mbr-overlay" style="opacity: 0.4; background-color: rgb(255, 51, 102);"></div>
+    <div class="container align-center">
+        <div class="row justify-content-md-center">
+            <div class="mbr-white col-md-10">
+                <h1 class="mbr-section-title align-center py-2 mbr-bold mbr-fonts-style display-1">
+                        HYRAX-BIOSCIENCES
+                </h1>
+                <p class="mbr-text align-center py-2 mbr-fonts-style display-5">
+                        Front-End Developer Technical Assessment.
+                </p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="counters1 counters cid-sq1Uy0CJWO" id="counters1-g">
+    <div class="container">
+      <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Countries</h2>
+      <h3 class="mbr-section-subtitle mbr-fonts-style display-5">Read from Amazon Web-service</h3>
+    </div>
+    <!-- Searchbar with a placeholder -->
+    <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+  </section>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of countryData.data | filter:filterTerm" size="3">
+          <div class="card-wrapper">
+            <div class="card-img">
+                <img src="../../assets/flags/{{item.attributes.code}}.svg" alt="flag">
+            </div>
+            <div class="card-box">
+                <h4 class="card-title mbr-fonts-style display-7">
+                  {{item.attributes.name}}
+                </h4>
+                <p class="mbr-text mbr-fonts-style display-7">
+                  {{item.attributes.capital}} is the capital city of {{item.attributes.name}} with the population of {{item.attributes.population}}, Their region is {{item.attributes.region}}.
+                </p>
+            </div>
+            <div class="mbr-section-btn text-center">
+                <a routerLink='/country/{{item.id}}' class="btn btn-primary display-4">
+                    Learn More
+                </a>
+            </div>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
